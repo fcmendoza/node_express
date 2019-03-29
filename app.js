@@ -84,7 +84,7 @@ app.get('/:operation/:a/:b', function (req, res) {
   }
 
   res.json({
-    r: result
+    result: result
   })
 })
  
