@@ -1,92 +1,96 @@
 var express = require('express')
 var app = express()
 
-var partners = [{
-    name: 'Jon',
-    favoriteHotBeverage: 'Chocolate',
-    favoriteColdBeverage: 'Soda',
-    likeChickpeas: true,
-    lastTimePlayedTag: 1
-  }, {
-    name: 'Jimmy',
-    favoriteHotBeverage: 'Tea',
-    favoriteColdBeverage: 'Beer',
-    likeChickpeas: true,
-    lastTimePlayedTag: 2
-  }, {
-    name: 'Mike',
-    favoriteHotBeverage: 'Chai',
-    favoriteColdBeverage: 'Orange Juice',
-    likeChickpeas: true,
-    lastTimePlayedTag: 10
-  },
-];
+// var partners = [{
+//     name: 'Jon',
+//     favoriteHotBeverage: 'Chocolate',
+//     favoriteColdBeverage: 'Soda',
+//     likeChickpeas: true,
+//     lastTimePlayedTag: 1
+//   }, {
+//     name: 'Jimmy',
+//     favoriteHotBeverage: 'Tea',
+//     favoriteColdBeverage: 'Beer',
+//     likeChickpeas: true,
+//     lastTimePlayedTag: 2
+//   }, {
+//     name: 'Mike',
+//     favoriteHotBeverage: 'Chai',
+//     favoriteColdBeverage: 'Orange Juice',
+//     likeChickpeas: true,
+//     lastTimePlayedTag: 10
+//   },
+// ];
 
-// app.get('/0', function (req, res) {
-//   res.json(partners[0])
+// // app.get('/0', function (req, res) {
+// //   res.json(partners[0])
+// // })
+
+// // app.get('/1', function (req, res) {
+// //   res.json(partners[1])
+// // })
+
+// app.get('/:id', function (req, res) {
+//   res.json(partners[req.params.id])
 // })
 
-// app.get('/1', function (req, res) {
-//   res.json(partners[1])
+// app.get('/students/:name/:project', function (req, res) {
+//   res.json({
+//     n: req.params.name,
+//     p: req.params.project
+//   })
 // })
-
-app.get('/:id', function (req, res) {
-  res.json(partners[req.params.id])
-})
-
-app.get('/students/:name/:project', function (req, res) {
-  res.json({
-    n: req.params.name,
-    p: req.params.project
-  })
-})
   
-app.get('/', function (req, res) {
-  res.json({
-    urls: ['http://localhost:3001/0', 'http://localhost:3001/1', 'http://localhost:3001/2']
-  })
-})
-
 // app.get('/', function (req, res) {
-//   res.send('0 1 2')
+//   res.json({
+//     urls: ['http://localhost:3001/0', 'http://localhost:3001/1', 'http://localhost:3001/2']
+//   })
 // })
 
-/*
-make an express app that makes the following work IN ONE ROUTE
-/add/1/2
-    should send back 3
-/multiply/3/5
-    should send back 15
-/divide/10/2
-    should send back 5
-/subtract/100/3
-    should send back 97
-*/
+// // app.get('/', function (req, res) {
+// //   res.send('0 1 2')
+// // })
 
-app.get('/:operation/:a/:b', function (req, res) {
-  var result = 0;
-  var a = parseInt(req.params.a);
-  var b = parseInt(req.params.b);
+// /*
+// make an express app that makes the following work IN ONE ROUTE
+// /add/1/2
+//     should send back 3
+// /multiply/3/5
+//     should send back 15
+// /divide/10/2
+//     should send back 5
+// /subtract/100/3
+//     should send back 97
+// */
 
-  switch (req.params.operation) {
-    case "add":
-      result = a + b;
-      break;
-    case "multiply":
-      result = a * b;
-      break;
-    case "divide":
-      result = a / b;
-      break;
-    case "subtract":
-      result = a - b;
-      break;
-  }
+// app.get('/:operation/:a/:b', function (req, res) {
+//   var result = 0;
+//   var a = parseInt(req.params.a);
+//   var b = parseInt(req.params.b);
 
-  res.json({
-    result: result
-  })
-})
+//   switch (req.params.operation) {
+//     case "add":
+//       result = a + b;
+//       break;
+//     case "multiply":
+//       result = a * b;
+//       break;
+//     case "divide":
+//       result = a / b;
+//       break;
+//     case "subtract":
+//       result = a - b;
+//       break;
+//   }
+
+//   res.json({
+//     result: result
+//   })
+// })
+
+app.get('/movies', function (req, res) {
+  res.json(req.query);
+});
  
 app.get('/polar-bear', function (req, res) {
   res.json({
