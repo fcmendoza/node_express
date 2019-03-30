@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nicolas Cage Page</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Movies:</h1>
+	<script>
+		$(document).ready(function(){
+			$.ajax({
+			    url : 'http://www.omdbapi.com/?apikey=62fb0f6&i=tt0119094',
+			    type : 'GET',
+			    dataType:'json',
+			    success : function(data) {              
+			        console.log('Data: '+data);
+			        $('#json-data').append(JSON.stringify(data));
+			    },
+			    error : function(request,error) {
+			        console.log("Request: " + JSON.stringify(request));
+			    }
+			});
+		});
+	</script>
+
+	<div id="json-data"></div>
+</body>
+</html>

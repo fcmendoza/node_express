@@ -179,7 +179,17 @@ app.get('/count/:type/:word', function (req, res) {
   res.send(type == 'vowel' ? 'vowel: ' + vowelCount + '\n' : 'not vowel: ' + nonVowelCount + '\n');
 });
 
+/*
+make another route called /nicolas-cage
 
+  send back a file called nicolas-cage.html
+
+    in the html file make an ajax call to a movie nicolas-cage was in and display the json on the page
+*/
+
+app.get('/nicolas-cage', function (req, res) {
+  res.sendFile(path.join(__dirname, "nicolas-cage.html")); 
+});
 
 app.listen(3001, function() {
 	console.log('listening on port ' + 3001)
