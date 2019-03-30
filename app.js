@@ -138,6 +138,49 @@ app.get('/bison', function (req, res) {
   })
 })
  
+/*
+make an express app with a route called /reverse/:word
+
+that takes a url param and prints the reverse of it
+
+make another express route called /count/:type/:word
+
+if type is vowel it'll count the vowels in the word
+
+if type is not vowel it'll count the non vowels in the word
+*/
+
+app.get('/reverse/:word', function (req, res) {
+  var word = req.params.word;
+  var reversed = '';
+  for (var i = word.length - 1; i >= 0; i--) {
+    reversed += word[i]
+  }
+  res.send(reversed+'\n');
+});
+
+app.get('/count/:type/:word', function (req, res) {
+  var type = req.params.type;
+  var word = req.params.word;
+  var vowelCount = 0;
+  var nonVowelCount = 0;
+  var vowels = ['a', 'e', 'i', 'o', 'u'];
+
+  for (var i = 0; i < word.length; i++) {
+    if (vowels.includes(word[i])) {
+      console.log(word[i], ' is a vowel.');
+      vowelCount += 1;
+    }
+    else {
+      console.log(word[i], ' is not a vowel.');
+      nonVowelCount += 1;
+    }
+  }
+  res.send(type == 'vowel' ? 'vowel: ' + vowelCount + '\n' : 'not vowel: ' + nonVowelCount + '\n');
+});
+
+
+
 app.listen(3001, function() {
 	console.log('listening on port ' + 3001)
 })
