@@ -1,4 +1,5 @@
 var express = require('express')
+var path = require('path')
 var app = express()
 
 // var partners = [{
@@ -90,6 +91,15 @@ var app = express()
 
 app.get('/movies', function (req, res) {
   res.json(req.query);
+});
+
+app.get('/sandy', function (req, res) {
+  res.sendFile(path.join(__dirname, "sandy.html")); // ~/projects/test_node/sandy.html
+});
+
+app.get('/__dirname', function (req, res) {
+  console.log('The __dirname is ', __dirname)
+  res.send(__dirname+'\n');
 });
  
 app.get('/polar-bear', function (req, res) {
