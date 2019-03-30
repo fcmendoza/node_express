@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css"  href="./assets/css/style.css">
+</head>
+<body>
+	<h1>Index</h1>
+	<img src='assets/images/puppy-one.png'/>
+	<img src='assets/images/puppy-two.png'/>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$.ajax({
+			url: '/tvshows',
+			method: 'GET'
+		}).then(function(res){
+			$('div#json-data').text(JSON.stringify(res));
+		})
+	</script>
+
+	<br/>
+	<br/>
+	<div id="json-data"></div>
+</body>
+</html>
