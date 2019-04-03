@@ -17,21 +17,23 @@
 	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	  crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		$.ajax({
-			url: '/cats',
-			method: 'GET'
-		}).then(function(cats){
-			for (var i in cats) {
-				var p = $('<li>');
-				//p.text(cats[i].cat_name);
-				//$('div').append(p);
-				p.text(`id: ${cats[i].id}, cat name: ${cats[i].cat_name}`);
-				$('div').append(p);
-			}
-		});
+		function getCats() {
+			$.ajax({
+				url: '/cats',
+				method: 'GET'
+			}).then(function(cats){
+				for (var i in cats) {
+					var p = $('<li>');
+					//p.text(cats[i].cat_name);
+					//$('div').append(p);
+					p.text(`id: ${cats[i].id}, cat name: ${cats[i].cat_name}`);
+					$('div').append(p);
+				}
+			});
+		}
 
 		$('form').submit(function(e) {
-			//e.preventDefault();
+			e.preventDefault();
 			var catname = $('input[name="cat_name"]').val();
 
 			$.ajax({
@@ -39,10 +41,12 @@
 				method: 'GET',
 				data: { cat_name: catname }
 			}).then(function(message){
-				alert(catname);
+				$('div').html('');
+				getCats();
 			});
 		});
 
+		getCats(); // retrieves and displays the cats when the page loads.
 	</script>
 	<div id="json-data"></div>
 </body>
