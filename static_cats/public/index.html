@@ -24,9 +24,13 @@
 			}).then(function(cats){
 				for (var i in cats) {
 					var p = $('<li>');
-					//p.text(cats[i].cat_name);
-					//$('div').append(p);
 					p.text(`id: ${cats[i].id}, cat name: ${cats[i].cat_name}`);
+
+					var a = $('<a>');
+					a.text('delete');
+					a.attr('href', '/cats-delete?cat_id='+cats[i].id)
+
+					p.append(a);
 					$('div').append(p);
 				}
 			});

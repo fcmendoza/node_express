@@ -5,3 +5,7 @@ body{
 img {
 	height: 100px;
 }
+
+a {
+	padding-left: 6px;
+}

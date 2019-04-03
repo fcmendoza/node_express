@@ -46,6 +46,13 @@ app.get('/cats-insert', function(req, res){
   });
 });
 
+app.get('/cats-delete', function(req, res){
+  connection.query("delete from cats where id=(?)", [req.query.cat_id], function (error, results, fields) {
+    if (error) res.send(error);
+    else res.redirect('/'); // sends to the home route.
+  });
+});
+
 app.listen(3001, function(){
 	console.log('listening on 3001');
 });
