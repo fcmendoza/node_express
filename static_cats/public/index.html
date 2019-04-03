@@ -6,6 +6,12 @@
 </head>
 <body>
 	<h1>Los Gatos, CA</h1>
+
+	<form>
+		<input type="text" name="cat_name" placeholder="insert the cat">
+		<button>insert the cat</button>
+	</form>
+
 	<script
 	  src="https://code.jquery.com/jquery-3.3.1.min.js"
 	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -22,7 +28,21 @@
 				p.text(`id: ${cats[i].id}, cat name: ${cats[i].cat_name}`);
 				$('div').append(p);
 			}
-		})
+		});
+
+		$('form').submit(function(e) {
+			//e.preventDefault();
+			var catname = $('input[name="cat_name"]').val();
+
+			$.ajax({
+				url: '/cats-insert',
+				method: 'GET',
+				data: { cat_name: catname }
+			}).then(function(message){
+				alert(catname);
+			});
+		});
+
 	</script>
 	<div id="json-data"></div>
 </body>
