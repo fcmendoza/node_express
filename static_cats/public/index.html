@@ -7,13 +7,16 @@
 <body>
 	<h1>Los Gatos, CA</h1>
 
-	<form>
+	<form method="POST" action="/cat">
+		<input type="text" name="cat_name" placeholder="insert the cat (POST)">
+		<button>insert the cat (POST)</button>
+		<button id="insert-cat">insert the cat (ajax)</button>
+	</form>
+
+	<form id="form-cats">
 		<input type="text" name="cat_name" placeholder="insert the cat">
 		<button>insert the cat</button>
 	</form>
-
-	<button id="insert-cat">insert the cat (ajax)</button>
-
 
 	<script
 	  src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -39,9 +42,9 @@
 			});
 		}
 
-		$('form').submit(function(e) {
+		$('form#form-cats').submit(function(e) {
 			e.preventDefault();
-			var catname = $('input[name="cat_name"]').val();
+			var catname = $('form#form-cats>input[name="cat_name"]').val();
 
 			$.ajax({
 				url: '/cats-insert',
@@ -58,7 +61,7 @@
 			var catname = $('input[name="cat_name"]').val();
 
 			$.ajax({
-				url: '/cats-insert-ajax',
+				url: '/cat',
 				method: 'POST',
 				data: { cat_name: catname }
 			}).then(function(message){
