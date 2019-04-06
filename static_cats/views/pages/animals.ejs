@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body class="container">
+	<main>
+		<h2>Cats</h2>
+		<div class="row">
+			<div class="col-sm-8">
+				
+				<div class="jumbotron">
+					<% for(var i=0; i<data.length; i++) { %>
+						<p><%= data[i].id %> - <%= data[i].cat_name %></p>
+					<% } %>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="well">
+					<h3>Look I'm A Sidebar!</h3>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+</body>
+</html>

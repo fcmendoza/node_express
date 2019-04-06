@@ -37,6 +37,13 @@ app.get('/class', function(req, res) {
   });
 });
 
+app.get('/animals', function(req, res) {
+  connection.query('SELECT * FROM cats', function (error, results, fields) {
+    if (error) res.send(error)
+    else res.render('pages/animals', { data: results });
+  });
+});
+
 app.get('/cats', function(req, res){
 	connection.query('SELECT * FROM cats', function (error, results, fields) {
 	  if (error) res.send(error)
