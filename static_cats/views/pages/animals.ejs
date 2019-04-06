@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" type="text/css"  href="./assets/css/style.css">
 </head>
 <body class="container">
 	<main>
@@ -10,7 +11,10 @@
 				
 				<div class="jumbotron">
 					<% for(var i=0; i<data.length; i++) { %>
-						<p><%= data[i].id %> - <%= data[i].cat_name %></p>
+						<li><%= data[i].id %> - <%= data[i].cat_name %>
+							<a href="/cats-delete?cat_id=<%= data[i].id %>">delete</a>
+						</li>
+						
 					<% } %>
 				</div>
 			</div>
