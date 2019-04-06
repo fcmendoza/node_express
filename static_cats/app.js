@@ -66,6 +66,12 @@ app.get('/cats-delete', function(req, res){
   });
 });
 
+// Default route when none of the above is hit.
+// If the user hits a route that doesn't thn redirect them to the home page.
+app.get('*', function(req, res) {
+  res.redirect('/');
+});
+
 app.listen(3001, function(){
 	console.log('listening on 3001');
 });
