@@ -8,6 +8,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set('view engine', 'ejs');
 
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(session({ secret: 'app', cookie: { maxAge: 1*1000*60*60*24*365 }}));
+app.use(cookieParser());
+
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
@@ -42,6 +47,29 @@ app.get('/animals', function(req, res) {
     if (error) res.send(error)
     else res.render('pages/animals', { data: results });
   });
+});
+
+app.get('/hey', function(req, res){
+  res.send('hey');
+});
+
+app.get('/set/:name', function(req, res){
+  req.session.na = req.params.name;
+  res.send('hey ' + req.session.na);
+});
+
+app.get('/get-name', function(req, res){
+  res.send('Session value: ' + req.session.na)
+});
+
+app.get('/apage', function(req, res){
+  res.send(req.session.na + "!!!")
+});
+
+app.get('/logout', function(req, res){
+  req.session.destroy(function(err) {
+     res.redirect('/')
+  })
 });
 
 app.get('/cats', function(req, res){
