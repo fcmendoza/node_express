@@ -6,6 +6,7 @@ app.use(express.static("public"));
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+app.set('view engine', 'ejs');
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -16,6 +17,25 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
+
+app.get('/', function(req, res) {
+  res.render('pages/index')
+});
+
+app.get('/about', function(req, res) {
+  res.render('pages/about')
+});
+
+app.get('/class', function(req, res) {
+  res.render('pages/class', {
+    data: [
+      {id: 1, name: "rob"},
+      {id: 2, name: "jon"},
+      {id: 3, name: "mat"},
+    ],
+    classroom: 507
+  });
+});
 
 app.get('/cats', function(req, res){
 	connection.query('SELECT * FROM cats', function (error, results, fields) {
