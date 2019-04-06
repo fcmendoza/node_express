@@ -17,8 +17,12 @@ in the index.html file make an ajax call to the /cats route and make paragraph t
 
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 app.use(express.static("public"));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -39,6 +43,15 @@ app.get('/cats', function(req, res){
 
 app.get('/cats-insert', function(req, res){
   connection.query('insert into cats (cat_name) values (?)', [req.query.cat_name], function (error, results, fields) {
+    if (error) res.send(error)
+    else res.json({
+      message: "success"
+    });
+  });
+});
+
+app.post('/cats-insert-ajax', function(req, res){
+  connection.query('insert into cats (cat_name) values (?)', [req.body.cat_name], function (error, results, fields) {
     if (error) res.send(error)
     else res.json({
       message: "success"

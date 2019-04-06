@@ -12,6 +12,9 @@
 		<button>insert the cat</button>
 	</form>
 
+	<button id="insert-cat">insert the cat (ajax)</button>
+
+
 	<script
 	  src="https://code.jquery.com/jquery-3.3.1.min.js"
 	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -50,8 +53,24 @@
 			});
 		});
 
+		$('button#insert-cat').click(function(e) {
+			e.preventDefault();
+			var catname = $('input[name="cat_name"]').val();
+
+			$.ajax({
+				url: '/cats-insert-ajax',
+				method: 'POST',
+				data: { cat_name: catname }
+			}).then(function(message){
+				$('div').html('');
+				getCats();
+			});
+		});
+
 		getCats(); // retrieves and displays the cats when the page loads.
 	</script>
+
+	<br/>
 	<div id="json-data"></div>
 </body>
 </html>
