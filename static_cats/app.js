@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : 'localhost', // mysqlserver.cmnemrz1mbor.us-west-1.rds.amazonaws.com
   user     : 'root',
   password : 'password',
   database : 'cats_db'
