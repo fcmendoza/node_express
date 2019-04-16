@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css"  href="./assets/css/style.css">
+</head>
+<body>
+	<h1>Los Gatos, CA</h1>
+
+	<form method="POST" action="/cat">
+		<input type="text" name="cat_name" placeholder="insert the cat (POST)">
+		<button>insert the cat (POST)</button>
+		<button id="insert-cat">insert the cat (ajax)</button>
+	</form>
+
+	<form id="form-cats">
+		<input type="text" name="cat_name" placeholder="insert the cat">
+		<button>insert the cat</button>
+	</form>
+
+	<script
+	  src="https://code.jquery.com/jquery-3.3.1.min.js"
+	  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		function getCats() {
+			$.ajax({
+				url: '/cats',
+				method: 'GET'
+			}).then(function(cats){
+				for (var i in cats) {
+					var p = $('<li>');
+					p.text(`id: ${cats[i].id}, cat name: ${cats[i].cat_name}`);
+
+					var a = $('<a>');
+					a.text('delete');
+					a.attr('href', '/cats-delete?cat_id='+cats[i].id)
+
+					p.append(a);
+					$('div').append(p);
+				}
+			});
+		}
+
+		$('form#form-cats').submit(function(e) {
+			e.preventDefault();
+			var catname = $('form#form-cats>input[name="cat_name"]').val();
+
+			$.ajax({
+				url: '/cats-insert',
+				method: 'GET',
+				data: { cat_name: catname }
+			}).then(function(message){
+				$('div').html('');
+				getCats();
+			});
+		});
+
+		$('button#insert-cat').click(function(e) {
+			e.preventDefault();
+			var catname = $('input[name="cat_name"]').val();
+
+			$.ajax({
+				url: '/cat',
+				method: 'POST',
+				data: { cat_name: catname }
+			}).then(function(message){
+				$('div').html('');
+				getCats();
+			});
+		});
+
+		getCats(); // retrieves and displays the cats when the page loads.
+	</script>
+
+	<br/>
+	<div id="json-data"></div>
+
+	<br/>
+    <footer>
+            (C) Copyright 2019 Fernando M.A.
+    </footer>
+</body>
+</html>
